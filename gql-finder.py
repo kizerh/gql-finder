@@ -642,9 +642,9 @@ def main():
         elif args.verbose:
             print(f"[-] {candidate} | GET {get_fp['status']} | POST {post_fp['status']}")
 
-    print("\n{C.GREEN}[*]{C.RESET} Done.")
+    print(f"\n{C.GREEN}[*]{C.RESET} Done.")
     if not hits:
-        print("{C.YELLOW}[!]{C.RESET} No strong candidates found with current suffix list.")
+        print(f"{C.YELLOW}[!]{C.RESET} No strong candidates found with current suffix list.")
         print("    Tip: feed additional app-specific paths via --suffixes custom.json")
     else:
         print(f"{C.GREEN}[+]{C.RESET} Found {len(hits)} interesting candidates (review the top few first).")
