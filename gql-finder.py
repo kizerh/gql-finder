@@ -440,11 +440,33 @@ def main():
 
     suffixes = DEFAULT_SUFFIXES
     if args.suffixes:
-        with open(args.suffixes, "r", encoding="utf-8") as f:
-            suffixes = json.load(f)
-            if not isinstance(suffixes, list) or not all(isinstance(x, str) for x in suffixes):
-                print("[!] suffixes file must be a JSON array of strings.")
+        try:
+            with open(args.suffixes, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+
+            parsed = []
+            for line in lines:
+                line = line.strip()
+
+                # Skip empty lines and comments
+                if not line or line.startswith("#"):
+                    continue
+
+                # Ensure suffix starts with /
+                if not line.startswith("/"):
+                    line = "/" + line
+
+                parsed.append(line)
+
+            if not parsed:
+                print("[!] Suffix file is empty after filtering comments/blank lines.")
                 sys.exit(1)
+
+            suffixes = parsed
+
+        except Exception as e:
+            print(f"[!] Failed to read suffix file: {e}")
+            sys.exit(1)
 
     session = requests.Session()
     session.headers.update({
