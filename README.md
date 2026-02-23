@@ -25,7 +25,7 @@ By default, gql-finder flags endpoints as **interesting** using:
 - `len` — Length delta vs closest baseline
 - `similarity` — Response similarity comparison vs baseline
 
-Users can selectively enable specific signals by using the `--filter` flag
+Users can selectively enable specific signals to reduce noise by using the `--filter` flag
 e.g
 -  only status-based findings
 `python gql-finder.py https://target.com --filter status`
